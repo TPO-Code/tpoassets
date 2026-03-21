@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="">
+  <style>
+  :root {
+    --foreground: #000000;
+  }
+</style>
+  <defs>
+    </defs>
+  <path style="fill: none; stroke: var(--foreground); stroke-width: 5px; stroke-linecap: round;" d="M 12 12.094 L 52 52" />
+  <path style="fill: none; stroke: var(--foreground); stroke-width: 5px; stroke-linecap: round;" d="M 51.906 12 L 12 52" />
+</svg>
