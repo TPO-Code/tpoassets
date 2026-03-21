@@ -16,6 +16,10 @@ _QICON_CACHE: dict[
 
 _CSS_VAR_DEF_RE = re.compile(r"(--([a-zA-Z0-9_-]+)\s*:\s*)([^;]+)(;)")
 _CSS_VAR_USE_RE_TEMPLATE = r"var\(\s*--{var_name}\s*(?:,\s*([^)]+))?\)"
+_HEX_RGBA_RE = re.compile(r"^#([0-9a-fA-F]{8})$")
+_HEX_RGBA_SHORT_RE = re.compile(r"^#([0-9a-fA-F]{4})$")
+_STYLE_ALPHA_COLOR_RE = re.compile(r"(?P<prop>fill|stroke)\s*:\s*#(?P<argb>[0-9a-fA-F]{8})\s*;")
+_ATTR_ALPHA_COLOR_RE = re.compile(r'(?P<prop>fill|stroke)=\"#(?P<argb>[0-9a-fA-F]{8})\"')
 
 
 def icon(
@@ -166,6 +170,10 @@ def _render_svg(
     # Pass 3: resolve any leftovers that use fallbacks.
     rendered = _resolve_remaining_var_functions(rendered)
 
+    # Pass 4: split alpha-bearing colors into RGB + explicit opacity,
+    # which is more reliable for Qt's SVG renderer than embedded alpha.
+    rendered = _expand_alpha_paint_properties(rendered)
+
     return rendered
 
 
@@ -204,14 +212,45 @@ def _resolve_slot_values(
         for key in ("foreground", "color-1", "color-2"):
             if key in resolved:
                 resolved[key] = final_foreground
-        return resolved
 
     if mono:
         for key in ("color-1", "color-2"):
             if key in resolved:
                 resolved[key] = "transparent"
 
-    return resolved
+    return {
+        key: _normalize_svg_color_value(value)
+        for key, value in resolved.items()
+    }
+
+
+def _normalize_svg_color_value(value: str) -> str:
+    text = str(value).strip()
+
+    match = _HEX_RGBA_RE.match(text)
+    if match:
+        hex_value = match.group(1)
+        red = hex_value[0:2]
+        green = hex_value[2:4]
+        blue = hex_value[4:6]
+        alpha = hex_value[6:8]
+        return f"#{alpha}{red}{green}{blue}"
+
+    match = _HEX_RGBA_SHORT_RE.match(text)
+    if match:
+        short_value = match.group(1)
+        expanded = "".join(ch * 2 for ch in short_value)
+        red = expanded[0:2]
+        green = expanded[2:4]
+        blue = expanded[4:6]
+        alpha = expanded[6:8]
+        return f"#{alpha}{red}{green}{blue}"
+
+    return text
+
+
+def _format_alpha(alpha: int) -> str:
+    return f"{alpha / 255:.4f}".rstrip("0").rstrip(".")
 
 
 def _replace_css_var_definitions(svg_text: str, values: dict[str, str]) -> str:
@@ -243,6 +282,26 @@ def _resolve_remaining_var_functions(svg_text: str) -> str:
 
     pattern = r"var\(\s*--[^,\s)]+(?:\s*,\s*([^)]+))?\)"
     return re.sub(pattern, repl, svg_text)
+
+
+def _expand_alpha_paint_properties(svg_text: str) -> str:
+    def style_repl(match: re.Match[str]) -> str:
+        prop = match.group("prop")
+        argb = match.group("argb")
+        alpha = int(argb[0:2], 16)
+        rgb = argb[2:8]
+        return f"{prop}: #{rgb}; {prop}-opacity: {_format_alpha(alpha)};"
+
+    svg_text = _STYLE_ALPHA_COLOR_RE.sub(style_repl, svg_text)
+
+    def attr_repl(match: re.Match[str]) -> str:
+        prop = match.group("prop")
+        argb = match.group("argb")
+        alpha = int(argb[0:2], 16)
+        rgb = argb[2:8]
+        return f'{prop}="#{rgb}" {prop}-opacity="{_format_alpha(alpha)}"'
+
+    return _ATTR_ALPHA_COLOR_RE.sub(attr_repl, svg_text)
 
 
 def _materialize_svg(

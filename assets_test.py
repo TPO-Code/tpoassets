@@ -19,8 +19,8 @@ class MainWindow(QMainWindow):
         add_icon_search_dir("/home/john/myproject/assets/icons")
         
         # Obtain icons using the tpo_assets.icon helper
-        save_icon = icon(".py", foreground="#ff0000")   
-        icon2 = icon("ui/power.svg")
+        save_icon = icon(".py", foreground="#ff000022")   
+        icon2 = icon("ui/power.svg",foreground="#00000022")
         explicit_text_icon = icon("files/txt")  # icon from a subdirectory "files/txt"
         
         # Create central widget and layout
