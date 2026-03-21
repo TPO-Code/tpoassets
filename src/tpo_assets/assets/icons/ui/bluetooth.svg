@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64px" height="64px">
+  <style>
+  :root {
+    --foreground: #000000;
+  }
+</style>
+  <path d="M 8.009 19.733 L 56 44 L 32 56 L 32 8 L 56 20 L 8 44" style="fill: none; stroke: var(--foreground); stroke-linecap: round; stroke-linejoin: round; stroke-width: 5px;" />
+</svg>

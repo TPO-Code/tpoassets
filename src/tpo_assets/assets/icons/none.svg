@@ -1,18 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xmlns:bx="https://boxy-svg.com" style="">
   <style>
     :root {
       --foreground: currentColor;
+      --color-1: #ffd43b;
+      --color-2: #3776ab;
     }
   </style>
-
-  <path d="M 6.2 10.95 L 6.2 13.05"
-        style="fill: none; stroke: var(--foreground); stroke-width: 2.2px; stroke-linecap: round; stroke-linejoin: round;"/>
-  <path d="M 10.839 8.439 A 4.95 4.95 0 0 1 10.839 15.561"
-        style="fill: none; stroke: var(--foreground); stroke-width: 2.2px; stroke-linecap: round; stroke-linejoin: round;"/>
-  <path d="M 12.735 6.475 A 7.68 7.68 0 0 1 12.735 17.525"
-        style="fill: none; stroke: var(--foreground); stroke-width: 2.2px; stroke-linecap: round; stroke-linejoin: round;"/>
-  <path d="M 14.624 4.519 A 10.4 10.4 0 0 1 14.624 19.481"
-        style="fill: none; stroke: var(--foreground); stroke-width: 2.2px; stroke-linecap: round; stroke-linejoin: round;"/>
-  <path d="M 7.8 6.7 L 18.3 17.3"
-        style="fill: none; stroke: var(--foreground); stroke-width: 2.35px; stroke-linecap: round; stroke-linejoin: round;"/>
+  <defs>
+    <bx:grid x="0" y="0" width="4" height="4"/>
+  </defs>
+  <ellipse style="stroke: rgb(255, 0, 0); fill: none; stroke-width: 8px;" cx="32" cy="32" rx="24" ry="24"/>
+  <path style="fill: none; stroke: rgb(255, 0, 0); stroke-width: 8px; transform-origin: 32px 32px;" d="M 15.029 15.029 L 48.971 48.971"/>
 </svg>

@@ -19,8 +19,8 @@ class MainWindow(QMainWindow):
         add_icon_search_dir("/home/john/myproject/assets/icons")
         
         # Obtain icons using the tpo_assets.icon helper
-        save_icon = icon(".py", foreground="#ff000022")   
-        icon2 = icon("ui/power.svg",foreground="#00000022")
+        save_icon = icon("ui/bluetooth")   
+        icon2 = icon("ui/bluetooth",foreground="#00000022")
         explicit_text_icon = icon("files/txt")  # icon from a subdirectory "files/txt"
         
         # Create central widget and layout
@@ -33,6 +33,10 @@ class MainWindow(QMainWindow):
         btn_save.setIcon(save_icon)
         btn_save.setFixedSize(100,100)
         btn_save.setIconSize(QSize(80, 80))
+        btn_save.setStyleSheet("""
+        padding:0px;
+        margin:0px
+        """)
         layout.addWidget(btn_save)
 
         btn_text = QPushButton("Text File")

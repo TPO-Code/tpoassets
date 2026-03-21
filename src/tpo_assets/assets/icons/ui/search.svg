@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="">
+  <style>
+  :root {
+    --foreground: #000000;
+    --color-1: #d8d8d8;
+  }
+</style>
+  <defs>
+    </defs>
+  <path style="fill: none; stroke: var(--foreground); stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;" d="M 38 38 L 48 48" />
+  <ellipse style="stroke: var(--foreground); fill: none; stroke-width: 4px;" cx="25" cy="25" rx="17" ry="17" />
+  <ellipse style="fill: var(--color-1); stroke: var(--foreground);" />
+  <path style="fill: none; stroke: var(--foreground); stroke-linecap: round; stroke-linejoin: round; stroke-width: 6px;" d="M 46 46 L 56 56" />
+  <path d="M 13.962 18.127 C 14.855 16.694 16.015 15.459 17.36 14.481 C 18.707 13.504 20.239 12.783 21.878 12.376 C 23.517 11.97 25.263 11.878 27.036 12.158 L 27.034 12.16 C 28.807 12.441 30.439 13.068 31.871 13.961 C 33.304 14.854 34.539 16.014 35.517 17.359" style="stroke: var(--foreground); fill: none; stroke-linecap: round; stroke-linejoin: round; transform-origin: 25px 25px; stroke-width: 2px;" />
+</svg>

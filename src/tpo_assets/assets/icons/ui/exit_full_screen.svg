@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="">
+  <style>
+  :root {
+    --foreground: #000000;
+  }
+</style>
+  <defs>
+    </defs>
+  <path style="fill: none; stroke: var(--foreground); stroke-linecap: round; stroke-linejoin: round; stroke-width: 5px;" d="M 10 42.009 L 21.952 42 L 21.952 54" />
+  <path style="fill: none; stroke: var(--foreground); stroke-linecap: round; stroke-linejoin: round; stroke-width: 5px;" d="M 41.939 54.022 L 42 42 L 54 42" />
+  <path style="fill: none; stroke: var(--foreground); stroke-linecap: round; stroke-linejoin: round; stroke-width: 5px;" d="M 21.991 9.908 L 22 22 L 10 22" />
+  <path style="fill: none; stroke: var(--foreground); stroke-linecap: round; stroke-linejoin: round; stroke-width: 5px;" d="M 41.798 9.838 L 42 22 L 54 22" />
+  <path style="fill: none; stroke: var(--foreground); stroke-linecap: round; stroke-linejoin: round; stroke-width: 5px;" d="M 8 8 L 22 22" />
+  <path style="fill: none; stroke: var(--foreground); stroke-linecap: round; stroke-linejoin: round; stroke-width: 5px;" d="M 22 42 L 8 56" />
+  <path style="fill: none; stroke: var(--foreground); stroke-linecap: round; stroke-linejoin: round; stroke-width: 5px;" d="M 56 8 L 42 22" />
+  <path style="fill: none; stroke: var(--foreground); stroke-linecap: round; stroke-linejoin: round; stroke-width: 5px;" d="M 42 42 L 56 56" />
+</svg>

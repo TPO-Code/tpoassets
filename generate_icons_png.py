@@ -54,7 +54,8 @@ class RenderOptions:
     icon_border: bool
     border_color: str
     icon_size: int
-    spacing: int
+    horizontal_spacing: int
+    vertical_spacing: int
     column_count: int
     mono: bool
     silhouette: bool
@@ -104,11 +105,11 @@ def grouped_asset_names() -> list[tuple[str, list[str]]]:
 
 
 def cell_width(options: RenderOptions) -> int:
-    return max(options.icon_size + options.spacing, 104)
+    return max(options.icon_size + options.horizontal_spacing, 104)
 
 
 def cell_height(options: RenderOptions) -> int:
-    return options.icon_size + options.spacing + LABEL_HEIGHT
+    return options.icon_size + options.vertical_spacing + LABEL_HEIGHT
 
 
 def image_height_for_groups(
@@ -176,13 +177,24 @@ def load_local_settings() -> dict[str, object]:
         return {}
 
     try:
-        return json.loads(SETTINGS_PATH.read_text(encoding="utf-8"))
+        loaded = json.loads(SETTINGS_PATH.read_text(encoding="utf-8"))
+        return loaded if isinstance(loaded, dict) else {}
     except Exception:
         return {}
 
 
 def save_local_settings(data: dict[str, object]) -> None:
-    SETTINGS_PATH.write_text(json.dumps(data, indent=2, sort_keys=True), encoding="utf-8")
+    existing: dict[str, object] = {}
+    if SETTINGS_PATH.is_file():
+        try:
+            loaded = json.loads(SETTINGS_PATH.read_text(encoding="utf-8"))
+            if isinstance(loaded, dict):
+                existing = loaded
+        except Exception:
+            existing = {}
+
+    existing.update(data)
+    SETTINGS_PATH.write_text(json.dumps(existing, indent=2, sort_keys=True), encoding="utf-8")
 
 
 def generate_icon_sheet(options: RenderOptions, output_path: Path) -> tuple[Path, int]:
@@ -236,7 +248,7 @@ def generate_icon_sheet(options: RenderOptions, output_path: Path) -> tuple[Path
             cell_y = y + (row * current_cell_height)
             icon_x = cell_x + (current_cell_width - options.icon_size) // 2
             icon_y = cell_y
-            text_y = icon_y + options.icon_size + max(6, options.spacing // 2)
+            text_y = icon_y + options.icon_size + max(6, options.vertical_spacing // 2)
 
             icon_name = PurePosixPath(asset_name).name
             if options.icon_border:
@@ -292,16 +304,23 @@ def render_single_icon_png(
 
     background_color = QColor(options.background)
     border_padding = 12 if options.icon_border else 0
-    canvas_size = max(256, options.icon_size + (options.spacing * 2) + border_padding + 24)
-    image = QImage(canvas_size, canvas_size, QImage.Format.Format_ARGB32)
+    canvas_width = max(
+        256,
+        options.icon_size + (options.horizontal_spacing * 2) + border_padding + 24,
+    )
+    canvas_height = max(
+        256,
+        options.icon_size + (options.vertical_spacing * 2) + border_padding + 24,
+    )
+    image = QImage(canvas_width, canvas_height, QImage.Format.Format_ARGB32)
     image.fill(background_color)
 
     painter = QPainter(image)
     apply_render_hints(painter, options.antialiasing)
 
     pixmap = render_icon_pixmap(icon_name, options)
-    icon_x = (canvas_size - pixmap.width()) // 2
-    icon_y = (canvas_size - pixmap.height()) // 2
+    icon_x = (canvas_width - pixmap.width()) // 2
+    icon_y = (canvas_height - pixmap.height()) // 2
 
     if options.icon_border:
         painter.setPen(QPen(QColor(options.border_color), 1.6))
@@ -379,9 +398,12 @@ class MainWindow(QWidget):
         self.icon_size_spin = QSpinBox()
         self.icon_size_spin.setRange(16, 256)
         self.icon_size_spin.setValue(48)
-        self.spacing_spin = QSpinBox()
-        self.spacing_spin.setRange(0, 96)
-        self.spacing_spin.setValue(18)
+        self.horizontal_spacing_spin = QSpinBox()
+        self.horizontal_spacing_spin.setRange(0, 96)
+        self.horizontal_spacing_spin.setValue(18)
+        self.vertical_spacing_spin = QSpinBox()
+        self.vertical_spacing_spin.setRange(0, 96)
+        self.vertical_spacing_spin.setValue(18)
         self.column_count_spin = QSpinBox()
         self.column_count_spin.setRange(1, 30)
         self.column_count_spin.setValue(COLUMNS)
@@ -401,7 +423,8 @@ class MainWindow(QWidget):
         form.addRow("Color 2", self.color_2_field)
         form.addRow("Border Color", self.border_color_field)
         form.addRow("Icon Size", self.icon_size_spin)
-        form.addRow("Spacing", self.spacing_spin)
+        form.addRow("Horizontal Spacing", self.horizontal_spacing_spin)
+        form.addRow("Vertical Spacing", self.vertical_spacing_spin)
         form.addRow("Columns", self.column_count_spin)
         form.addRow("Single Icon", self.single_icon_field)
 
@@ -432,7 +455,8 @@ class MainWindow(QWidget):
             icon_border=self.icon_border_checkbox.isChecked(),
             border_color=self.border_color_field.value(),
             icon_size=self.icon_size_spin.value(),
-            spacing=self.spacing_spin.value(),
+            horizontal_spacing=self.horizontal_spacing_spin.value(),
+            vertical_spacing=self.vertical_spacing_spin.value(),
             column_count=self.column_count_spin.value(),
             mono=self.mono_checkbox.isChecked(),
             silhouette=self.silhouette_checkbox.isChecked(),
@@ -451,13 +475,16 @@ class MainWindow(QWidget):
             "mono": self.mono_checkbox.isChecked(),
             "silhouette": self.silhouette_checkbox.isChecked(),
             "icon_size": self.icon_size_spin.value(),
-            "spacing": self.spacing_spin.value(),
+            "horizontal_spacing": self.horizontal_spacing_spin.value(),
+            "vertical_spacing": self.vertical_spacing_spin.value(),
             "column_count": self.column_count_spin.value(),
         }
 
     def apply_saved_settings(self, settings: dict[str, object]) -> None:
         if not settings:
             return
+
+        legacy_spacing = int(settings.get("spacing", 18))
 
         self.background_field.line_edit.setText(str(settings.get("background", "#ffffff")))
         self.foreground_field.line_edit.setText(str(settings.get("foreground", "#111111")))
@@ -472,7 +499,12 @@ class MainWindow(QWidget):
         self.mono_checkbox.setChecked(bool(settings.get("mono", False)))
         self.silhouette_checkbox.setChecked(bool(settings.get("silhouette", False)))
         self.icon_size_spin.setValue(int(settings.get("icon_size", 48)))
-        self.spacing_spin.setValue(int(settings.get("spacing", 18)))
+        self.horizontal_spacing_spin.setValue(
+            int(settings.get("horizontal_spacing", legacy_spacing))
+        )
+        self.vertical_spacing_spin.setValue(
+            int(settings.get("vertical_spacing", legacy_spacing))
+        )
         self.column_count_spin.setValue(int(settings.get("column_count", COLUMNS)))
 
     def persist_settings(self) -> None:
