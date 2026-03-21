@@ -24,3 +24,4 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 tpo_assets = ["assets/**/*.svg"]
+
