@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <style>
+    :root {
+      --foreground: currentColor;
+    }
+  </style>
+
+  <path d="M 6.833 5 Q 12 2 17.167 5 Q 18.367 5 18.367 6.2 L 13.783 15.5 Q 12 19.05 10.217 15.5 L 5.633 6.2 Q 5.633 5 6.833 5 Z"
+        style="fill: var(--foreground);"/>
+</svg>

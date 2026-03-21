@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xmlns:bx="https://boxy-svg.com" style="">
+  <style>
+    :root {
+      --foreground: currentColor;
+      --color-1: #ffd43b;
+      --color-2: #3776ab;
+    }
+  </style>
+  <defs>
+    <bx:grid x="0" y="0" width="4" height="4"/>
+  </defs>
+  <path style="fill: none; stroke: rgb(75, 61, 156); stroke-width: 0.1px;" d="M 8 8 L 8 56 L 56 56 L 56 8 L 8 8 Z"/>
+  <path style="fill: none; stroke: rgb(75, 61, 156); stroke-width: 0.1px;" d="M 7.925 31.949 L 56 32"/>
+  <path style="fill: none; stroke: rgb(75, 61, 156); stroke-width: 0.1px;" d="M 32 8 L 32 56"/>
+  <path style="fill: none; stroke: rgb(75, 61, 156); stroke-width: 0.1px;" d="M 8.009 8.158 C 8.009 8.158 56 56.084 56 56"/>
+  <path style="fill: none; stroke: rgb(75, 61, 156); stroke-width: 0.1px;" d="M 56.011 7.99 L 8 56"/>
+  <path style="fill: none; stroke: rgb(75, 61, 156); stroke-width: 0.1px;" d="M 15.995 7.99 L 16 56"/>
+  <path style="fill: none; stroke: rgb(75, 61, 156); stroke-width: 0.1px;" d="M 47.941 7.822 L 48 56"/>
+</svg>

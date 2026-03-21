@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <style>
+    :root {
+      --foreground: currentColor;
+    }
+  </style>
+
+  <rect x="6.8" y="6.8" width="10.4" height="10.4" rx="2.4"
+        style="fill: var(--foreground);"/>
+</svg>

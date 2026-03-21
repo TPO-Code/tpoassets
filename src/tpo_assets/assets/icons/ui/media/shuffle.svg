@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <style>
+    :root {
+      --foreground: currentColor;
+    }
+  </style>
+
+  <path d="M 5 7 H 8.1 C 9.8 7 10.8 7.7 11.9 9.1 L 13.9 11.9 C 15 13.3 16 14 17.7 14 H 20"
+        style="fill: none; stroke: var(--foreground); stroke-width: 2.2px; stroke-linecap: round; stroke-linejoin: round;"/>
+  <path d="M 17.4 11.6 L 20 14 L 17.4 16.4"
+        style="fill: none; stroke: var(--foreground); stroke-width: 2.2px; stroke-linecap: round; stroke-linejoin: round;"/>
+  <path d="M 5 17 H 8.1 C 9.8 17 10.8 16.3 11.9 14.9 L 13.9 12.1 C 15 10.7 16 10 17.7 10 H 20"
+        style="fill: none; stroke: var(--foreground); stroke-width: 2.2px; stroke-linecap: round; stroke-linejoin: round;"/>
+  <path d="M 17.4 7.6 L 20 10 L 17.4 12.4"
+        style="fill: none; stroke: var(--foreground); stroke-width: 2.2px; stroke-linecap: round; stroke-linejoin: round;"/>
+</svg>

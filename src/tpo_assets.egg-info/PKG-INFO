@@ -1,0 +1,327 @@
+Metadata-Version: 2.4
+Name: tpo-assets
+Version: 0.1.0
+Summary: TPO shared SVG asset store
+Author: John
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: pyside6
+
+
+# tpo-assets
+
+`tpo_assets` is a small Python package for resolving SVG icons and loading them as Qt `QIcon`s.
+
+It is designed for applications that want:
+
+- a packaged icon set
+- optional project-specific icon overrides
+- simple file-extension icon lookup
+- lightweight SVG recoloring at load time
+
+It does not manage themes, widget sizing, or application styling. It just finds icons and, when requested, applies simple color substitution.
+
+---
+
+## What it looks like in real code
+
+This is the most useful example because it shows almost everything the package does:
+
+```python
+from PySide6.QtCore import QSize
+from PySide6.QtWidgets import QApplication, QPushButton
+
+from tpo_assets import add_icon_search_dir, icon
+
+add_icon_search_dir("/path/to/myproject/assets/icons")
+
+btn = QPushButton("Warning")
+btn.setIcon(icon("status/warning", fg="#eceff4", accent="#ebcb8b"))
+btn.setIconSize(QSize(20, 20))
+```
+
+That one call can:
+
+* resolve a packaged icon
+* let a project override it with its own SVG
+* substitute SVG color roles
+* return a normal `QIcon`
+
+File icons are just as simple:
+
+```python
+text_file_icon = icon(".txt")
+python_file_icon = icon(".py")
+```
+
+Explicit category lookup is also supported:
+
+```python
+power_icon = icon("ui/power", fg="#ff0000")
+text_icon = icon("files/txt")
+```
+
+---
+
+## Installation
+
+Standard install:
+
+```bash
+pip install tpo-assets
+```
+
+If you use `uv`:
+
+```bash
+uv add tpo-assets
+```
+
+---
+
+## Usage
+
+`tpo_assets` resolves icon names to SVG assets using a small set of lookup rules.
+
+It supports three common request styles:
+
+### 1. Explicit icon lookup
+
+```python
+icon("ui/save")
+icon("status/warning")
+icon("files/txt")
+```
+
+This is the most direct form. The string is treated as an icon path inside the icon store.
+
+### 2. File-extension lookup
+
+```python
+icon(".txt")
+icon(".py")
+icon(".md")
+```
+
+If the string starts with `.`, it is treated as a file extension lookup.
+
+For example, `".txt"` looks for a file icon named `txt.svg`.
+
+### 3. Plain name lookup
+
+```python
+icon("save")
+icon("warning")
+icon("txt")
+```
+
+This is a direct lookup by name without category shorthand.
+
+---
+
+## Lookup order
+
+When resolving an icon, `tpo_assets` checks:
+
+1. registered custom icon directories
+2. packaged built-in icons
+
+For file-extension lookups such as `".txt"`, the fallback is:
+
+* `files/default.svg`
+
+For non-file lookups such as `"ui/save"` or `"warning"`, the resolver returns the package's missing-icon asset if no match is found.
+
+That missing-icon asset is mainly useful for debugging incorrect names or missing assets during development.
+
+---
+
+## Custom icon directories
+
+Applications can register one or more additional icon directories:
+
+```python
+from tpo_assets import add_icon_search_dir
+
+add_icon_search_dir("/path/to/myproject/assets/icons")
+```
+
+These directories are checked before the packaged icons, so a project can override specific assets without modifying the package.
+
+Custom directories should mirror the packaged structure.
+
+Example:
+
+```text
+myproject/
+└── assets/
+    └── icons/
+        ├── ui/
+        │   └── save.svg
+        ├── status/
+        │   └── warning.svg
+        └── files/
+            ├── default.svg
+            ├── txt.svg
+            └── py.svg
+```
+
+---
+
+## SVG color substitution
+
+`tpo_assets.icon()` can optionally replace simple color roles when loading SVGs:
+
+```python
+icon("ui/save", fg="#d8dee9")
+icon("status/warning", fg="#eceff4", accent="#ebcb8b")
+```
+
+Supported roles:
+
+* `fg`
+* `accent`
+
+### Supported SVG styles
+
+#### `currentColor`
+
+Monochrome icons can use standard SVG `currentColor`:
+
+```svg
+<path d="..." stroke="currentColor"/>
+```
+
+If `fg` is passed, `currentColor` is replaced with that value.
+
+#### Placeholder tokens
+
+Templated icons can use placeholders:
+
+```svg
+<path d="..." stroke="{fg}"/>
+<circle cx="12" cy="12" r="3" fill="{accent}"/>
+```
+
+If `fg` or `accent` is passed, those placeholders are replaced before the icon is loaded into Qt.
+
+---
+
+## Qt example
+
+```python
+import sys
+
+from PySide6.QtCore import QSize
+from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget
+
+from tpo_assets import add_icon_search_dir, icon
+
+
+class MainWindow(QMainWindow):
+    def __init__(self) -> None:
+        super().__init__()
+        self.setWindowTitle("tpo_assets example")
+
+        add_icon_search_dir("/path/to/myproject/assets/icons")
+
+        central = QWidget()
+        layout = QVBoxLayout(central)
+        self.setCentralWidget(central)
+
+        btn_power = QPushButton("Power")
+        btn_power.setIcon(icon("ui/power", fg="#ff0000"))
+        btn_power.setIconSize(QSize(24, 24))
+        layout.addWidget(btn_power)
+
+        btn_text = QPushButton("Text file")
+        btn_text.setIcon(icon(".txt"))
+        layout.addWidget(btn_text)
+
+        btn_warning = QPushButton("Warning")
+        btn_warning.setIcon(icon("status/warning", fg="#eceff4", accent="#ebcb8b"))
+        btn_warning.setIconSize(QSize(24, 24))
+        layout.addWidget(btn_warning)
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    raise SystemExit(app.exec())
+```
+
+---
+
+## API
+
+### `tpo_assets`
+
+#### `add_icon_search_dir(directory)`
+
+Register a custom icon directory.
+
+#### `clear_icon_search_dirs()`
+
+Remove all registered custom icon directories.
+
+#### `registered_icon_search_dirs()`
+
+Return the currently registered custom icon directories.
+
+#### `icon_path(name)`
+
+Resolve an icon request to a concrete SVG path.
+
+#### `icon_paths(name)`
+
+Return the resolution chain for debugging.
+
+#### `icon(name, fg=None, accent=None)`
+
+Resolve an icon and return it as a `QIcon`.
+
+#### `clear_icon_cache()`
+
+Clear the generated Qt icon cache.
+
+---
+
+<table>
+  <tr>
+    <td align="center"><img src="ABSOLUTE_IMAGE_URL" width="48"><br><code>status/volume_1</code></td>
+    <td align="center"><img src="ABSOLUTE_IMAGE_URL" width="48"><br><code>status/volume_2</code></td>
+    <td align="center"><img src="ABSOLUTE_IMAGE_URL" width="48"><br><code>status/volume_3</code></td>
+    <td align="center"><img src="ABSOLUTE_IMAGE_URL" width="48"><br><code>status/volume_muted</code></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="ABSOLUTE_IMAGE_URL" width="48"><br><code>status/volume_1</code></td>
+    <td align="center"><img src="ABSOLUTE_IMAGE_URL" width="48"><br><code>status/volume_2</code></td>
+    <td align="center"><img src="ABSOLUTE_IMAGE_URL" width="48"><br><code>status/volume_3</code></td>
+    <td align="center"><img src="ABSOLUTE_IMAGE_URL" width="48"><br><code>status/volume_muted</code></td>
+  </tr>
+</table>
+---
+
+## Development
+
+Editable install:
+
+```bash
+uv pip install -e .
+```
+
+If package metadata or bundled assets changed:
+
+```bash
+uv pip install -e . --reinstall
+```
+
+---
+
+## License
+
+MIT
+
+```

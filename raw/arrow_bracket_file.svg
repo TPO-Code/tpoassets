@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xmlns:bx="https://boxy-svg.com" style="">
+  <style>
+    :root {
+      --foreground: currentColor;
+      --color-1: #ffd43b;
+      --color-2: #3776ab;
+    }
+  </style>
+  <defs>
+    <bx:grid x="0" y="0" width="4" height="4"/>
+    <bx:export>
+      <bx:file format="svg"/>
+    </bx:export>
+  </defs>
+  <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 3px; stroke-linecap: round; stroke-linejoin: round;" d="M 12 4 L 32 4 L 52 24 L 52 60 L 12 60 L 12 4 Z"/>
+  <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 3px; stroke-linecap: round; stroke-linejoin: round;" d="M 32 4 C 32 4 32 24 32 24 C 32 24 52 24 52 24 L 32 4"/>
+  <text style="fill: none; font-family: FreeMono; font-size: 28px; stroke: rgb(0, 0, 0); stroke-width: 3px; white-space: pre;" transform="matrix(0.952469, 0.00059, 0, 0.857644, 2.092994, 8.327618)"><tspan x="14.601" y="46.086">&lt;&gt;</tspan><tspan x="14.60099983215332" dy="1em">​</tspan></text>
+</svg>

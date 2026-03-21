@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xmlns:bx="https://boxy-svg.com">
+  <style>
+    :root {
+      --foreground: currentColor;
+    }
+  </style>
+
+  <defs>
+    <bx:grid x="0" y="0" width="2" height="4"/>
+  </defs>
+
+  <path d="M 13.929 4 L 38 4 M 54 20 L 54 55 C 54 57.761 52.241 60 50.071 60 L 13.929 60 C 11.759 60 10 57.761 10 55 L 10 9 C 10 6.239 11.759 4 13.929 4"
+        style="stroke: var(--foreground); fill: none; stroke-width: 3px;"/>
+
+  <path d="M 38 4 L 54 20 L 44.666 20 C 40.985 20 38 17.014 38 13.332 L 38 4 Z"
+        style="stroke: var(--foreground); stroke-miterlimit: 1; fill: none; stroke-width: 3px; stroke-linejoin: round;"/>
+
+  <path d="M 16 16 L 30 16"
+        style="fill: none; stroke: var(--foreground); stroke-linecap: round; stroke-width: 4px;"/>
+  <path d="M 16 28 L 40 28"
+        style="fill: none; stroke: var(--foreground); stroke-linecap: round; stroke-width: 4px;"/>
+  <path d="M 16 40 L 34 40"
+        style="fill: none; stroke: var(--foreground); stroke-linecap: round; stroke-width: 4px;"/>
+  <path d="M 16 52 L 38 52"
+        style="fill: none; stroke: var(--foreground); stroke-linecap: round; stroke-width: 4px;"/>
+</svg>

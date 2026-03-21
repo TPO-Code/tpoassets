@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    :root {
+      --foreground: currentColor;
+      --color-1: #ffd43b;
+      --color-2: #3776ab;
+    }
+  </style>
+
+  <path d="M 12 4 L 32 4 L 52 24 L 52 60 L 12 60 L 12 4 Z"
+        style="fill: none; stroke: var(--foreground); stroke-width: 3px; stroke-linecap: round; stroke-linejoin: round;"/>
+  <path d="M 32 4 C 32 4 32 24 32 24 C 32 24 52 24 52 24 L 32 4"
+        style="fill: none; stroke: var(--foreground); stroke-width: 3px; stroke-linecap: round; stroke-linejoin: round;"/>
+  <path d="M 24 30.5 C 24 29.119 25.119 28 26.5 28 L 34.5 28 C 35.881 28 37 29.119 37 30.5 L 37 38.5 C 37 39.881 35.881 41 34.5 41 L 25 41 L 25 50.5 C 25 51.881 23.881 53 22.5 53 C 21.119 53 20 51.881 20 50.5 L 20 38.5 C 20 37.119 21.119 36 22.5 36 L 32 36 L 32 33 L 26.5 33 C 25.119 33 24 31.881 24 30.5 Z"
+        style="fill: var(--color-2); stroke: var(--foreground); stroke-width: 2px;"/>
+  <path d="M 39.903 53.384 C 39.918 54.765 38.812 55.896 37.431 55.912 L 29.528 56 C 28.86 56.007 28.217 55.747 27.742 55.278 C 27.267 54.808 27 54.168 27 53.5 L 27 45.5 C 27 44.119 28.119 43 29.5 43 L 39 43 L 39 33.5 C 39 32.119 40.119 31 41.5 31 C 42.881 31 44 32.119 44 33.5 L 44 45.5 C 44 46.881 42.881 48 41.5 48 L 32 48 L 32 50.972 L 37.375 50.912 C 38.756 50.897 39.887 52.003 39.903 53.384 Z"
+        style="fill: var(--color-1); stroke: var(--foreground); stroke-width: 2px;"/>
+</svg>

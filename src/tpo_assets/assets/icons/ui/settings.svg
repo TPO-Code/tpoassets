@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <style>
+    :root {
+      --foreground: currentColor;
+    }
+  </style>
+
+  <circle cx="12" cy="12" r="4.1"
+          style="fill: none; stroke: var(--foreground); stroke-width: 2.2px;"/>
+  <circle cx="12" cy="12" r="1.4"
+          style="fill: var(--foreground);"/>
+  <path d="M 12 3.8 V 6"
+        style="fill: none; stroke: var(--foreground); stroke-width: 2.2px; stroke-linecap: round;"/>
+  <path d="M 12 18 V 20.2"
+        style="fill: none; stroke: var(--foreground); stroke-width: 2.2px; stroke-linecap: round;"/>
+  <path d="M 3.8 12 H 6"
+        style="fill: none; stroke: var(--foreground); stroke-width: 2.2px; stroke-linecap: round;"/>
+  <path d="M 18 12 H 20.2"
+        style="fill: none; stroke: var(--foreground); stroke-width: 2.2px; stroke-linecap: round;"/>
+  <path d="M 6.25 6.25 L 7.8 7.8"
+        style="fill: none; stroke: var(--foreground); stroke-width: 2.2px; stroke-linecap: round;"/>
+  <path d="M 16.2 16.2 L 17.75 17.75"
+        style="fill: none; stroke: var(--foreground); stroke-width: 2.2px; stroke-linecap: round;"/>
+  <path d="M 17.75 6.25 L 16.2 7.8"
+        style="fill: none; stroke: var(--foreground); stroke-width: 2.2px; stroke-linecap: round;"/>
+  <path d="M 7.8 16.2 L 6.25 17.75"
+        style="fill: none; stroke: var(--foreground); stroke-width: 2.2px; stroke-linecap: round;"/>
+</svg>
