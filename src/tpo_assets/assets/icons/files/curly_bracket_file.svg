@@ -12,5 +12,5 @@
         style="fill: none; stroke: var(--foreground); stroke-width: 3px; stroke-linecap: round; stroke-linejoin: round;"/>
   <text x="32" y="45"
         text-anchor="middle"
-        style="fill: none; stroke: var(--foreground); stroke-width: 3px; font-family: monospace; font-size: 24px; white-space: pre;">&lt;&gt;</text>
+        style="fill: none; stroke: var(--foreground); stroke-width: 3px; font-family: monospace; font-size: 24px; white-space: pre;">{}</text>
 </svg>

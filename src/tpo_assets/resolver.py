@@ -14,7 +14,14 @@ BUILTIN_FILE_ICON_ALIASES: dict[str, str] = {
     "html": "angle_bracket_file",
     "xhtml": "angle_bracket_file",
     "xml": "angle_bracket_file",
-    "doc": "txt",
+    "cpp": "curly_bracket_file",
+    "h": "curly_bracket_file",
+    "cu": "curly_bracket_file",
+    "md": "hash_file",
+    "svg": "image",
+    "png": "image",
+    "jpg": "image",
+    "gif": "image",
 }
 
 
