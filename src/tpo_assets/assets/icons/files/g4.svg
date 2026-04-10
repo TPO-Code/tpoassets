@@ -3,16 +3,9 @@
   <style>
     :root {
       --foreground: currentColor;
-      --color-1: #ffd43b;
-      --color-2: #3776ab;
     }
   </style>
-
-  <path d="M 12 4 L 32 4 L 52 24 L 52 60 L 12 60 L 12 4 Z"
-        style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 3px; stroke-linecap: round; stroke-linejoin: round;"/>
-  <path d="M 32 4 C 32 4 32 24 32 24 C 32 24 52 24 52 24 L 32 4"
-        style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 3px; stroke-linecap: round; stroke-linejoin: round;"/>
-  <text x="32" y="45"
-        text-anchor="middle"
-        style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 3px; font-family: FreeMono; font-size: 24px; white-space: pre;">g4</text>
+  <path d="M 12 4 L 32 4 L 52 24 L 52 60 L 12 60 L 12 4 Z" style="fill: none; stroke: var(--foreground); stroke-width: 3px; stroke-linecap: round; stroke-linejoin: round;" />
+  <path d="M 32 4 C 32 4 32 24 32 24 C 32 24 52 24 52 24 L 32 4" style="fill: none; stroke: var(--foreground); stroke-width: 3px; stroke-linecap: round; stroke-linejoin: round;" />
+  <text x="32" y="45" text-anchor="middle" style="fill: none; stroke: var(--foreground); stroke-width: 3px; font-family: FreeMono; font-size: 24px; white-space: pre;">g4</text>
 </svg>
